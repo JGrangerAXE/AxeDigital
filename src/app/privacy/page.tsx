@@ -1,0 +1,4 @@
+﻿import type { Metadata } from "next";
+import { InteriorPage } from "@/components/shared/InteriorPage";
+export const metadata:Metadata={title:"Privacy"};
+export default function Privacy(){return <InteriorPage eyebrow="Privacy" title="Privacy Information" copy="A final privacy policy will be published after Axe confirms its data practices and legal requirements."><section className="surface-dark"><div className="container-shell section-pad"><div className="industrial-panel max-w-3xl p-7 sm:p-10"><h2 className="text-xl font-black uppercase">Current development status</h2><p className="mt-5 leading-8 text-white/60">The current site preview does not transmit the careers or contact forms and does not store application or quote information. Before launch, this page must be replaced with an approved policy covering form submissions, resumes, analytics, cookies, media submissions, retention, and contact rights.</p></div></div></section></InteriorPage>}

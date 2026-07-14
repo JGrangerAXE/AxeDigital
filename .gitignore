@@ -1,0 +1,19 @@
+﻿/node_modules
+/.next/
+/.vercel/
+/out/
+/build
+/coverage
+/tmp/
+/.agents/
+/.codex/
+.env*
+!.env.example
+*.tsbuildinfo
+*.pem
+.DS_Store
+npm-debug.log*
+*.log
+
+# Preserve the original 4K video sources locally until web derivatives exist.
+/public/media/*.mp4

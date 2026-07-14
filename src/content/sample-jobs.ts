@@ -1,0 +1,2 @@
+﻿import type { JobOpening } from "@/types/jobs";
+export const sampleJobs:JobOpening[]=[{id:"sample-welder",title:"Welder / Fabricator",area:"Welding & Fabrication",location:"Location to be confirmed",summary:"Sample format for a future role involving fabrication and welding work.",sample:true},{id:"sample-construction",title:"Construction Team Member",area:"Construction",location:"Location to be confirmed",summary:"Sample format for a future role supporting field construction projects.",sample:true}];
