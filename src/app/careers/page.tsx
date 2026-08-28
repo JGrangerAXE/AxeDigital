@@ -25,7 +25,6 @@ const areas: Array<{ title: string; asset?: AxeMediaAsset }> = [
   { title: "Welding & Fabrication", asset: axeMedia.fabricatedBeam },
   { title: "Machine Operation", asset: axeMedia.steelMachine },
   { title: "Painting & Coatings" },
-  { title: "Assembly", asset: axeMedia.shopWide },
   { title: "General Application", asset: axeMedia.telehandlerDetail },
 ];
 
@@ -138,7 +137,7 @@ export default function CareersPage() {
 
       <section id="apply" className="surface-mid-gradient scroll-mt-20 border-t border-white/10 py-20 sm:py-24">
         <div className="container-shell">
-          <SectionHeading eyebrow="General interest" title="Start The Conversation." copy="Don’t see a current fit? Tell us where you’re interested in contributing. This first-pass form validates entries locally but does not submit or store them." />
+          <SectionHeading eyebrow="General interest" title="Start The Conversation." copy="Don’t see a current fit? Tell us where you’re interested in contributing. Complete the application below and include a resume if you have one." />
           <ApplicationForm />
         </div>
       </section>

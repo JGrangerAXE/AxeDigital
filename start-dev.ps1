@@ -27,7 +27,7 @@ if (-not (Test-Path -LiteralPath $nextCli)) {
 
 Push-Location $PSScriptRoot
 try {
-    & $node $nextCli dev --port $Port
+    & $node $nextCli dev --webpack --port $Port
     exit $LASTEXITCODE
 }
 finally {

@@ -26,15 +26,20 @@ npm install
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
+APPLICATION_RECIPIENT_EMAIL=
+APPLICATION_FROM_EMAIL=
+RESEND_API_KEY=
+PRIVACY_CONTACT_EMAIL=
 ```
 
-Only variables beginning with `NEXT_PUBLIC_` are available in browser code. `SUPABASE_SERVICE_ROLE_KEY` is server-only and must never be imported into a client component, committed, or shared publicly.
+Only variables beginning with `NEXT_PUBLIC_` are available in browser code. `SUPABASE_SERVICE_ROLE_KEY` and `RESEND_API_KEY` are server-only and must never be imported into a client component, committed, or shared publicly. The employment workflow also requires the recipient, sender, and privacy-contact values listed above.
 
 ## Quality commands
 
 ```bash
 npm run lint
 npm run build
+npm test
 npm start
 ```
 
@@ -47,9 +52,9 @@ Deploy to a standard Next.js host such as Vercel or another Node-compatible plat
 - Media frames are labeled placeholders; no remote stock imagery is used.
 - Logo treatment is temporary.
 - Job records are local development samples and visibly marked as non-active.
-- Careers and contact forms do not submit or store data.
-- Resume upload is disabled until secure storage and retention rules are approved.
-- Supabase clients are prepared, but no schema, table, migration, or remote connection is active.
+- The Careers application workflow is implemented, and its migration has been applied to the dedicated Axe Digital Supabase project.
+- The Contact form does not submit or store data.
+- Applicant email retry automation, HR login, and an applicant admin interface are not implemented.
 - Contact information, company story, services, benefits, compensation, and schedules need leadership approval.
 
 ## Adding real brand assets and media
