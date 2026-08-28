@@ -5,6 +5,7 @@ import { AxeMedia } from "@/components/shared/AxeMedia";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { axeMedia, type AxeMediaAsset } from "@/content/media";
+import { getPublicContact } from "@/lib/site/contact";
 
 export const metadata: Metadata = {
   title: "Build Something Real",
@@ -28,6 +29,8 @@ const capabilities: Array<{ title: string; asset?: AxeMediaAsset; className: str
 ];
 
 export default function Home() {
+  const { quoteEmailHref } = getPublicContact();
+
   return (
     <>
       <section className="relative flex min-h-[100svh] items-end overflow-hidden border-b border-white/10 pt-20">
@@ -157,7 +160,7 @@ export default function Home() {
           <h2 className="display max-w-3xl text-5xl sm:text-7xl">Ready to Build Something?</h2>
           <div className="flex flex-col gap-3 sm:flex-row">
             <ButtonLink href="/careers" className="bg-black text-white hover:bg-white hover:text-black">Join Axe</ButtonLink>
-            <ButtonLink href="/contact" variant="secondary" className="border-black/40 text-black hover:bg-black hover:text-white">Request a Quote</ButtonLink>
+            <ButtonLink href={quoteEmailHref ?? "/contact"} variant="secondary" className="border-black/40 text-black hover:bg-black hover:text-white">Request a Quote</ButtonLink>
           </div>
         </div>
       </section>
