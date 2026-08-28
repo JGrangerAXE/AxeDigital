@@ -1,6 +1,7 @@
 import type { ApplicationRepository } from "./application-repository";
 import type { ApplicationEmailProvider } from "../email/application-email";
 import type { ApplicationInput, ValidatedResume } from "../validation/careers";
+import type { JobApplicationContext } from "../../types/jobs";
 
 type SummaryPdf = { bytes: Uint8Array; filename: string };
 
@@ -12,6 +13,7 @@ export type SubmitApplicationDependencies = {
     submittedAt: string;
     input: ApplicationInput;
     resume: ValidatedResume | null;
+    jobContext: JobApplicationContext | null;
   }) => Promise<SummaryPdf>;
   createId?: () => string;
   now?: () => Date;
@@ -32,8 +34,9 @@ export async function submitEmploymentApplication(
   input: ApplicationInput,
   resume: ValidatedResume | null,
   dependencies: SubmitApplicationDependencies,
+  jobContext: JobApplicationContext | null = null,
 ): Promise<SubmitApplicationResult> {
-  const createId = dependencies.createId ?? crypto.randomUUID;
+  const createId = dependencies.createId ?? (() => crypto.randomUUID());
   const now = dependencies.now ?? (() => new Date());
   const logError = dependencies.logError ?? (() => undefined);
   const applicationId = createId();
@@ -51,6 +54,7 @@ export async function submitEmploymentApplication(
       input,
       resume,
       resumeStoragePath,
+      jobContext,
     });
   } catch (error) {
     if (resumeStoragePath) {
@@ -68,13 +72,14 @@ export async function submitEmploymentApplication(
 
   const attemptedAt = now().toISOString();
   try {
-    const summaryPdf = await dependencies.generatePdf({ applicationId, submittedAt, input, resume });
+    const summaryPdf = await dependencies.generatePdf({ applicationId, submittedAt, input, resume, jobContext });
     const delivery = await dependencies.emailProvider.sendApplication({
       applicationId,
       submittedAt,
       input,
       summaryPdf,
       resume,
+      jobContext,
     });
     try {
       await dependencies.repository.markEmailSent(applicationId, attemptedAt, delivery.providerMessageId);

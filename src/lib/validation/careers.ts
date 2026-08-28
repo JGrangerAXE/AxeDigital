@@ -51,7 +51,7 @@ export type ApplicationField =
 export type ApplicationFieldErrors = Partial<Record<ApplicationField, string>>;
 
 export type ApplicationValidationResult =
-  | { success: true; input: ApplicationInput; resume: ValidatedResume | null }
+  | { success: true; input: ApplicationInput; resume: ValidatedResume | null; jobPostingId: string | null }
   | { success: false; errors: ApplicationFieldErrors };
 
 const LIMITS = {
@@ -192,5 +192,9 @@ export async function validateApplicationForm(formData: FormData): Promise<Appli
       optionalMessage: values.note || null,
     },
     resume: resumeResult.resume,
+    jobPostingId: (() => {
+      const value = normalizeSingleLine(formData.get("jobPostingId"));
+      return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value) ? value : null;
+    })(),
   };
 }

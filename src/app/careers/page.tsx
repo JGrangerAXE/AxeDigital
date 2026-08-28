@@ -5,8 +5,8 @@ import { JobListings } from "@/components/careers/JobListings";
 import { AxeMedia } from "@/components/shared/AxeMedia";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { sampleJobs } from "@/content/sample-jobs";
 import { axeMedia, type AxeMediaAsset } from "@/content/media";
+import { getOpenJobPosting, getOpenJobPostings } from "@/lib/careers/job-repository";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -28,10 +28,34 @@ const areas: Array<{ title: string; asset?: AxeMediaAsset }> = [
   { title: "General Application", asset: axeMedia.telehandlerDetail },
 ];
 
-const expectations = ["Compensation", "Schedule", "Benefits", "Training", "Advancement"];
-const process = ["Apply", "Talk With Us", "Meet the Team", "Get to Work"];
+const process = [
+  {
+    title: "Apply",
+    copy: "Fill out the application form below and tell us where you’d like to contribute.",
+  },
+  {
+    title: "Talk With Us",
+    copy: "We’ll review your application and expect to get back to you within one week.",
+  },
+  {
+    title: "Meet the Team",
+    copy: "If we move forward, the process will generally include two interviews with the Axe team.",
+  },
+  {
+    title: "Get to Work",
+    copy: "After a signed offer, plan on at least one week before your start date so pre-employment requirements can be completed.",
+  },
+];
 
-export default function CareersPage() {
+export const dynamic = "force-dynamic";
+
+export default async function CareersPage({ searchParams }: { searchParams: Promise<{ job?: string }> }) {
+  const { job: jobId } = await searchParams;
+  const [jobs, selectedJob] = await Promise.all([
+    getOpenJobPostings(),
+    jobId ? getOpenJobPosting(jobId) : Promise.resolve(null),
+  ]);
+  const jobContext = selectedJob ? { id: selectedJob.id, title: selectedJob.jobTitle } : null;
   return (
     <>
       <section className="relative min-h-[88svh] overflow-hidden border-b border-white/10 pt-20">
@@ -99,26 +123,12 @@ export default function CareersPage() {
 
       <section id="opportunities" className="surface-dark scroll-mt-20 py-20 sm:py-24">
         <div className="container-shell">
-          <SectionHeading eyebrow="Open opportunities" title="See Where You Fit." copy="Positions will appear here when they are entered into the careers system. The records below are clearly marked development samples and are not active openings." />
-          <div className="mt-10"><JobListings jobs={sampleJobs} /></div>
+          <SectionHeading eyebrow="Open opportunities" title="See Where You Fit." copy="Current openings are listed below, but we’re always interested in capable people who want to do good work. If you don’t see the right fit today, fill out the application below and start the conversation." />
+          <div className="mt-10"><JobListings jobs={jobs} /></div>
         </div>
       </section>
 
-      <section className="surface-charcoal border-y border-white/10 py-20 sm:py-24">
-        <div className="container-shell">
-          <SectionHeading eyebrow="What to expect" title="The Details Belong With The Job." copy="Details vary by position and will be provided in each job listing." />
-          <div className="mt-10 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-5">
-            {expectations.map((item) => (
-              <div key={item} className="bg-[var(--background-dark)] p-6">
-                <h3 className="font-black uppercase">{item}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/45">To be confirmed for each position.</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="surface-dark py-20 sm:py-24">
+      <section className="surface-dark pb-20 pt-0 sm:pb-24">
         <div className="container-shell grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-end">
           <div>
             <SectionHeading eyebrow="Hiring process" title="Simple. Direct. Human." />
@@ -126,9 +136,10 @@ export default function CareersPage() {
           </div>
           <ol className="grid gap-3 sm:grid-cols-2">
             {process.map((step, index) => (
-              <li key={step} className="industrial-panel min-h-44 p-6">
+              <li key={step.title} className="industrial-panel min-h-44 p-6">
                 <span className="text-xs font-black text-[var(--accent)]">Step {index + 1}</span>
-                <h3 className="mt-12 text-xl font-black uppercase">{step}</h3>
+                <h3 className="mt-12 text-xl font-black uppercase">{step.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/55">{step.copy}</p>
               </li>
             ))}
           </ol>
@@ -137,8 +148,8 @@ export default function CareersPage() {
 
       <section id="apply" className="surface-mid-gradient scroll-mt-20 border-t border-white/10 py-20 sm:py-24">
         <div className="container-shell">
-          <SectionHeading eyebrow="General interest" title="Start The Conversation." copy="Don’t see a current fit? Tell us where you’re interested in contributing. Complete the application below and include a resume if you have one." />
-          <ApplicationForm />
+          <SectionHeading eyebrow={jobContext ? "Position application" : "General interest"} title="Start The Conversation." copy="Don’t see a current fit? Tell us where you’re interested in contributing. Complete the application below and include a resume if you have one." />
+          <ApplicationForm jobContext={jobContext} />
         </div>
       </section>
     </>

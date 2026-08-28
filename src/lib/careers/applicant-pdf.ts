@@ -3,12 +3,14 @@ import path from "node:path";
 import fontkit from "@pdf-lib/fontkit";
 import { PDFDocument, type PDFFont, type PDFPage, rgb } from "pdf-lib";
 import type { ApplicationInput, ValidatedResume } from "@/lib/validation/careers";
+import type { JobApplicationContext } from "@/types/jobs";
 
 type ApplicantPdfInput = {
   applicationId: string;
   submittedAt: string;
   input: ApplicationInput;
   resume: ValidatedResume | null;
+  jobContext?: JobApplicationContext | null;
 };
 
 const PAGE_WIDTH = 612;
@@ -76,6 +78,7 @@ export async function generateApplicantSummaryPdf({
   submittedAt,
   input,
   resume,
+  jobContext = null,
 }: ApplicantPdfInput) {
   const document = await PDFDocument.create();
   document.registerFontkit(fontkit);
@@ -135,6 +138,7 @@ export async function generateApplicantSummaryPdf({
   drawSection("APPLICANT");
   drawField("Full Name", input.fullName);
   drawField("Career Area", input.careerArea);
+  if (jobContext) drawField("Job Posting", jobContext.title);
 
   drawSection("CONTACT");
   drawField("Phone", input.phone);

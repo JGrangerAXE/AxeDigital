@@ -82,6 +82,36 @@ test("database failure cleans up an uploaded resume", async () => {
   assert.deepEqual(events, ["resume-uploaded", "insert-failed", "resume-removed"]);
 });
 
+test("job-specific application stores context and includes the title in PDF and email", async () => {
+  const context = { id: "00000000-0000-4000-8000-000000000010", title: "Construction Team Member" };
+  let storedContext = null, pdfContext = null, emailContext = null;
+  await submitEmploymentApplication(input, null, {
+    repository: {
+      async uploadResume() { throw new Error("unused"); }, async removeResume() {},
+      async insertApplication(record) { storedContext = record.jobContext; },
+      async markEmailSent() {}, async markEmailFailed() {},
+    },
+    emailProvider: { async sendApplication(application) { emailContext = application.jobContext; return { providerMessageId: "test-message" }; } },
+    async generatePdf(application) { pdfContext = application.jobContext; return { bytes: new Uint8Array([1]), filename: "summary.pdf" }; },
+    createId: () => "00000000-0000-4000-8000-000000000001",
+  }, context);
+  assert.deepEqual(storedContext, context); assert.deepEqual(pdfContext, context); assert.deepEqual(emailContext, context);
+});
+
+test("general application retains null job context", async () => {
+  let storedContext = undefined;
+  await submitEmploymentApplication(input, null, {
+    repository: {
+      async uploadResume() { throw new Error("unused"); }, async removeResume() {},
+      async insertApplication(record) { storedContext = record.jobContext; },
+      async markEmailSent() {}, async markEmailFailed() {},
+    },
+    emailProvider: { async sendApplication() { return { providerMessageId: "test-message" }; } },
+    async generatePdf() { return { bytes: new Uint8Array([1]), filename: "summary.pdf" }; },
+  });
+  assert.equal(storedContext, null);
+});
+
 test("migration keeps application records and resume storage private", async () => {
   const sql = await readFile(
     new URL("../supabase/migrations/20260828000100_employment_applications.sql", import.meta.url),

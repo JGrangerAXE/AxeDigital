@@ -10,6 +10,7 @@ import {
   type ApplicationFieldErrors,
 } from "@/lib/validation/careers";
 import { createSubmissionGate } from "@/lib/careers/submission-gate";
+import type { JobApplicationContext } from "@/types/jobs";
 
 const fields = "w-full border border-white/20 bg-black/35 px-4 py-3 text-white placeholder:text-white/30 focus:border-[var(--accent)]";
 
@@ -19,7 +20,7 @@ type SubmissionResponse = {
   fieldErrors?: ApplicationFieldErrors;
 };
 
-export function ApplicationForm() {
+export function ApplicationForm({ jobContext = null }: { jobContext?: JobApplicationContext | null }) {
   const [errors, setErrors] = useState<ApplicationFieldErrors>({});
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -113,6 +114,13 @@ export function ApplicationForm() {
 
   return (
     <form onSubmit={submit} noValidate encType="multipart/form-data" className="industrial-panel mt-10 grid gap-6 p-6 sm:grid-cols-2 sm:p-9">
+      {jobContext ? (
+        <div className="border-l-2 border-[var(--accent)] bg-white/5 p-5 sm:col-span-2">
+          <p className="text-xs font-black uppercase tracking-[.14em] text-[var(--accent)]">Applying for</p>
+          <p className="mt-2 text-xl font-black uppercase">{jobContext.title}</p>
+          <input type="hidden" name="jobPostingId" value={jobContext.id} />
+        </div>
+      ) : null}
       <div>
         <label htmlFor="name" className="mb-2 block text-sm font-bold">Full name *</label>
         <input id="name" name="name" autoComplete="name" className={fields} aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />

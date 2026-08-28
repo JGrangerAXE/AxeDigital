@@ -1,6 +1,7 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { ApplicationInput, ValidatedResume } from "@/lib/validation/careers";
+import type { JobApplicationContext } from "@/types/jobs";
 
 export const EMPLOYMENT_RESUMES_BUCKET = "employment-resumes";
 
@@ -10,6 +11,7 @@ export type ApplicationRecord = {
   input: ApplicationInput;
   resume: ValidatedResume | null;
   resumeStoragePath: string | null;
+  jobContext: JobApplicationContext | null;
 };
 
 export interface ApplicationRepository {
@@ -61,6 +63,7 @@ export class SupabaseApplicationRepository implements ApplicationRepository {
       resume_size_bytes: resume?.sizeBytes ?? null,
       application_status: "new",
       email_delivery_status: "pending",
+      job_posting_id: record.jobContext?.id ?? null,
     });
     if (error) throw new ApplicationPersistenceError("Application database storage failed.");
   }

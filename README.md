@@ -30,9 +30,13 @@ APPLICATION_RECIPIENT_EMAIL=
 APPLICATION_FROM_EMAIL=
 RESEND_API_KEY=
 PRIVACY_CONTACT_EMAIL=
+PUBLIC_SITE_URL=
+CAREERS_ADMIN_EMAILS=
 ```
 
 Only variables beginning with `NEXT_PUBLIC_` are available in browser code. `SUPABASE_SERVICE_ROLE_KEY` and `RESEND_API_KEY` are server-only and must never be imported into a client component, committed, or shared publicly. The employment workflow also requires the recipient, sender, and privacy-contact values listed above.
+
+`PUBLIC_SITE_URL` supplies the public Careers URL encoded in job-posting PDFs. `CAREERS_ADMIN_EMAILS` is a comma-separated server-only allowlist for approved Careers Admin users. Enable email magic-link authentication in the dedicated Axe Digital Supabase project and add only approved Axe work addresses. See `docs/job-posting-admin-guide.md`.
 
 ## Quality commands
 

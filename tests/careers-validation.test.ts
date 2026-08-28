@@ -35,6 +35,14 @@ test("accepts an application without a resume", async () => {
   if (result.success) assert.equal(result.resume, null);
 });
 
+test("accepts a valid optional job posting context", async () => {
+  const form = validForm();
+  form.set("jobPostingId", "00000000-0000-4000-8000-000000000010");
+  const result = await validateApplicationForm(form);
+  assert.equal(result.success, true);
+  if (result.success) assert.equal(result.jobPostingId, "00000000-0000-4000-8000-000000000010");
+});
+
 test("accepts a valid PDF resume and preserves its metadata", async () => {
   const form = validForm();
   form.set("resume", pdfFile("Test Résumé.pdf"));

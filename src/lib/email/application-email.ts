@@ -1,5 +1,6 @@
 import "server-only";
 import type { ApplicationInput, ValidatedResume } from "@/lib/validation/careers";
+import type { JobApplicationContext } from "@/types/jobs";
 
 export type ApplicationEmailPackage = {
   applicationId: string;
@@ -7,6 +8,7 @@ export type ApplicationEmailPackage = {
   input: ApplicationInput;
   summaryPdf: { bytes: Uint8Array; filename: string };
   resume: ValidatedResume | null;
+  jobContext: JobApplicationContext | null;
 };
 
 export type ApplicationEmailDelivery = {
@@ -37,18 +39,19 @@ export class ResendApplicationEmailProvider implements ApplicationEmailProvider 
   ) {}
 
   async sendApplication(application: ApplicationEmailPackage): Promise<ApplicationEmailDelivery> {
-    const { input, applicationId, submittedAt, summaryPdf, resume } = application;
+    const { input, applicationId, submittedAt, summaryPdf, resume, jobContext } = application;
     const submitted = new Intl.DateTimeFormat("en-US", {
       dateStyle: "medium",
       timeStyle: "short",
       timeZone: "America/Denver",
     }).format(new Date(submittedAt));
-    const subject = `NEW APPLICANT — ${input.fullName} — ${input.careerArea}`;
+    const subject = `NEW APPLICANT — ${input.fullName} — ${jobContext?.title ?? input.careerArea}`;
     const text = [
       "A new employment application has been received.",
       "",
       `Applicant: ${input.fullName}`,
       `Career area: ${input.careerArea}`,
+      ...(jobContext ? [`Job posting: ${jobContext.title}`] : []),
       `Phone: ${input.phone}`,
       `Email: ${input.email}`,
       `Submitted: ${submitted}`,
@@ -61,6 +64,7 @@ export class ResendApplicationEmailProvider implements ApplicationEmailProvider 
       <table cellpadding="6" cellspacing="0" role="presentation">
         <tr><td><strong>Applicant</strong></td><td>${escapeHtml(input.fullName)}</td></tr>
         <tr><td><strong>Career area</strong></td><td>${escapeHtml(input.careerArea)}</td></tr>
+        ${jobContext ? `<tr><td><strong>Job posting</strong></td><td>${escapeHtml(jobContext.title)}</td></tr>` : ""}
         <tr><td><strong>Phone</strong></td><td>${escapeHtml(input.phone)}</td></tr>
         <tr><td><strong>Email</strong></td><td>${escapeHtml(input.email)}</td></tr>
         <tr><td><strong>Submitted</strong></td><td>${escapeHtml(submitted)}</td></tr>

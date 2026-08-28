@@ -81,6 +81,18 @@ Job listings should be queried server-side and filtered to approved, published r
 - Advanced applicant tracking and HR reporting
 - Integration with Axe Operations or any other Axe database
 
+## Job publishing workflow
+
+`job_templates` stores private reusable job content. `job_postings` stores copied, independent snapshots with `draft`, `open`, `filled`, `closed`, or `archived` status. Only `open` rows are publicly selectable. Posting URLs use stable UUIDs at `/careers/jobs/<id>`; no template data or administrative metadata is returned by public queries.
+
+The public Careers page queries through the anonymous Supabase client and explicitly filters `status = open`; database RLS applies the same restriction. Job detail pages repeat that filter and return the site 404 state for every non-open or unknown posting. Public pages are dynamically rendered so marking a posting filled or closed removes it on the next request.
+
+`/admin/careers` uses Supabase email magic links. The browser holds the Supabase user session and sends its access token to `/api/admin/careers`. The server verifies that token with Supabase Auth, checks the normalized email against the server-only `CAREERS_ADMIN_EMAILS` allowlist, and only then creates the service-role repository. Service-role credentials never enter the admin client bundle. There is no public signup workflow or Microsoft/Entra integration.
+
+Admin actions validate the seven approved content fields on the server. Creating from a template copies its current content into a draft posting. Publishing sets `status = open` and retains the first `published_at`; marking filled or closed sets the corresponding timestamp and preserves the row. PDFs are generated on demand, are not stored, and encode `${PUBLIC_SITE_URL}/careers` in a printable QR code.
+
+Applications opened from a job carry a hidden posting UUID. The submission server verifies that the posting remains open, stores `employment_applications.job_posting_id`, and includes the posting title in the applicant PDF and notification email. General applications retain a null posting ID and otherwise follow the existing durable-storage workflow.
+
 ## Accessibility and performance
 
 The interface uses semantic sections, labeled fields, keyboard-accessible navigation, visible focus states, reduced-motion support, responsive layouts, and high-contrast colors. Future media must include useful alternative text or captions, optimized formats, explicit dimensions, and restrained autoplay behavior.

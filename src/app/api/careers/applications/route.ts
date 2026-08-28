@@ -5,6 +5,8 @@ import { submitEmploymentApplication } from "@/lib/careers/submit-application";
 import { createApplicationEmailProviderFromEnvironment } from "@/lib/email/application-email";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { validateApplicationForm } from "@/lib/validation/careers";
+import { getOpenJobPosting } from "@/lib/careers/job-repository";
+import type { JobApplicationContext } from "@/types/jobs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -32,8 +34,15 @@ export async function POST(request: Request) {
   }
 
   let repository: SupabaseApplicationRepository;
+  let jobContext: JobApplicationContext | null = null;
   try {
-    repository = new SupabaseApplicationRepository(createServiceRoleClient());
+    const serviceClient = createServiceRoleClient();
+    repository = new SupabaseApplicationRepository(serviceClient);
+    if (validation.jobPostingId) {
+      const posting = await getOpenJobPosting(validation.jobPostingId, serviceClient);
+      if (!posting) return NextResponse.json({ ok: false, message: "That position is no longer available. Refresh the page to submit a general application." }, { status: 400 });
+      jobContext = { id: posting.id, title: posting.jobTitle };
+    }
   } catch (error) {
     console.error("Employment application storage is not configured.", {
       error: error instanceof Error ? error.message : "Unknown configuration error.",
@@ -52,7 +61,7 @@ export async function POST(request: Request) {
       logError(message, details) {
         console.error(message, details);
       },
-    });
+    }, jobContext);
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (error) {
     console.error("Employment application could not be stored.", {
