@@ -86,7 +86,7 @@ export default async function CareersPage({ searchParams }: { searchParams: Prom
 
       <section className="surface-dark py-20 sm:py-24">
         <div className="container-shell">
-          <SectionHeading eyebrow="Why Axe" title="Work Worth Doing." copy="No inflated promises. Just a clear focus on skilled work, contribution, and getting better at what you do." />
+          <SectionHeading eyebrow="Why Axe" title="Work Worth Doing." />
           <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_.92fr]">
             <div className="grid gap-3 sm:grid-cols-2">
               {values.map((value, index) => (
@@ -104,7 +104,7 @@ export default async function CareersPage({ searchParams }: { searchParams: Prom
 
       <section className="surface-mid-gradient border-y border-white/10 py-20 sm:py-24">
         <div className="container-shell">
-          <SectionHeading eyebrow="Career areas" title="Find Your Direction." copy="These categories represent types of work at Axe—not active job postings." />
+          <SectionHeading eyebrow="Career areas" title="Find Your Direction." />
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {areas.map((area, index) => area.asset ? (
               <AxeMedia key={area.title} asset={area.asset} label={`0${index + 1} / ${area.title}`} className="min-h-72" sizes="(max-width: 768px) 100vw, 33vw" />
