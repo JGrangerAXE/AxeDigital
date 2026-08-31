@@ -26,7 +26,7 @@ export default function About() {
               <div className="mt-7 space-y-6 leading-8 text-white/65">
                 <p>When EMIT Technologies began constructing a new 38,000 sq ft office addition in 2019, EMIT began hiring qualified construction personnel for the project. By the time the office addition was completed in 2021, a very capable and qualified construction team had been assembled.</p>
                 <p>Even before the office was completed and as COVID hit, the decision was made to take on projects for external customers in the community. The construction team worked as Axe Build dba EMIT Technologies Inc.</p>
-                <p>As Axe Build continued to grow and take on larger projects, it became apparent the team had matured enough to be a free-standing company. Legal work began in March 2024, and on April 1, 2024, Axe Build, LLC officially became an employer, with seven members on the initial team.</p>
+                <p>As Axe Build continued to grow and take on larger projects, it became apparent the team had matured enough to be a free-standing company. Legal work began in March 2024, and on April 1, 2024, Axe Build, LLC officially became an employer with seven members on the initial team.</p>
               </div>
             </div>
           </div>
