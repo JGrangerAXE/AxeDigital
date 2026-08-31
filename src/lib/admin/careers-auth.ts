@@ -9,6 +9,6 @@ export async function requireCareersAdmin(request: Request) {
   const token = authorization?.startsWith("Bearer ") ? authorization.slice(7).trim() : "";
   if (!token) throw new AdminAuthenticationError("Authentication required.");
   const { data, error } = await createServerSupabaseClient().auth.getUser(token);
-  if (error || !data.user || !isCareersAdminEmail(data.user.email, process.env.CAREERS_ADMIN_EMAILS)) throw new AdminAuthenticationError("Authorized Axe admin access required.");
+  if (error || !data.user || !isCareersAdminEmail(data.user.email, process.env.CAREERS_ADMIN_EMAILS)) throw new AdminAuthenticationError("Authorized Axe Build admin access required.");
   return data.user;
 }

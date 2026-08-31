@@ -12,7 +12,7 @@ import {
 import { createSubmissionGate } from "@/lib/careers/submission-gate";
 import type { JobApplicationContext } from "@/types/jobs";
 
-const fields = "w-full border border-white/20 bg-black/35 px-4 py-3 text-white placeholder:text-white/30 focus:border-[var(--accent)]";
+const fields = "w-full border border-white/20 bg-[var(--background-deep)]/45 px-4 py-3 text-white placeholder:text-white/30 focus:border-[var(--accent)]";
 
 type SubmissionResponse = {
   ok?: boolean;
@@ -98,7 +98,7 @@ export function ApplicationForm({ jobContext = null }: { jobContext?: JobApplica
         <p className="eyebrow">Application received</p>
         <h3 id="application-received-title" className="display mt-5 text-5xl sm:text-6xl">Thank You For Your Interest.</h3>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">
-          Thank you for your interest in Axe Build. We’ll review your information and expect to be in contact within the next week.
+          Thank you for your interest in Axe Build. We’ve received your information and will review it promptly. If we’d like to move forward, we’ll be in touch about next steps.
         </p>
         <div className="mt-9 border-l-2 border-[var(--accent)] pl-6">
           <h4 className="text-sm font-black uppercase tracking-[.14em] text-[var(--accent)]">What to expect</h4>
@@ -174,7 +174,7 @@ export function ApplicationForm({ jobContext = null }: { jobContext?: JobApplica
         {error("resume")}
       </div>
       <div className="sm:col-span-2">
-        <button type="submit" disabled={submitting} className="min-h-13 w-full bg-[var(--accent)] px-6 py-4 text-sm font-black uppercase tracking-[.12em] text-black hover:bg-white disabled:cursor-wait disabled:opacity-65 sm:w-auto">
+        <button type="submit" disabled={submitting} className="min-h-13 w-full bg-[var(--accent)] px-6 py-4 text-sm font-black uppercase tracking-[.12em] text-[var(--background-deep)] hover:bg-white disabled:cursor-wait disabled:opacity-65 sm:w-auto">
           {submitting ? "Submitting application…" : "Submit application"}
         </button>
         {message ? <p className="mt-4 text-sm leading-6 text-red-300" role="alert">{message}</p> : null}

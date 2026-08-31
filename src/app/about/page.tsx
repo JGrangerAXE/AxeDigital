@@ -1,6 +1,84 @@
-﻿import type { Metadata } from "next";
-import { InteriorPage } from "@/components/shared/InteriorPage";
+import type { Metadata } from "next";
 import { AxeMedia } from "@/components/shared/AxeMedia";
+import { InteriorPage } from "@/components/shared/InteriorPage";
+import { SectionHeading } from "@/components/shared/SectionHeading";
+import { companyPurpose, companyValues } from "@/content/company";
 import { axeMedia } from "@/content/media";
-export const metadata:Metadata={title:"About",description:"Learn about Axe Build, LLC and its construction and fabrication work."};
-export default function About(){return <InteriorPage eyebrow="About Axe" title="Built Around The Work." copy="Axe Build, LLC is a construction company with a growing fabrication and manufacturing division. Approved company history and leadership details will be added here."><section className="surface-dark"><div className="container-shell section-pad"><div className="grid gap-10 lg:grid-cols-2 lg:items-center"><AxeMedia asset={axeMedia.crewRebar} label="Built by the people doing the work" className="min-h-96" sizes="(max-width: 1024px) 100vw, 50vw"/><div><p className="eyebrow">Our direction</p><h2 className="display mt-5 text-5xl sm:text-6xl">Construction Strength. Fabrication Capability.</h2><p className="mt-6 leading-8 text-white/60">The final About page will tell Axe’s story without separating the field from the shop. It will explain where the company came from, how the team works, and what it is building next.</p><div className="mt-8 border-l-2 border-[var(--accent)] pl-5 text-sm leading-7 text-white/45">Company description, history, leadership, service area, and operating values require leadership approval.</div></div></div></div></section></InteriorPage>}
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "Learn how Axe Build, LLC developed into a vertically integrated design-build commercial construction company.",
+};
+
+export default function About() {
+  return (
+    <InteriorPage
+      eyebrow="About Axe Build"
+      title="Where Axe Build Came From."
+      copy="Axe Build began as a construction team assembled by EMIT Technologies and became Axe Build, LLC on April 1, 2024."
+    >
+      <section className="surface-dark">
+        <div className="container-shell section-pad">
+          <div className="grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
+            <AxeMedia asset={axeMedia.crewRebar} label="Built through real construction work" className="min-h-[34rem]" sizes="(max-width: 1024px) 100vw, 52vw" priority />
+            <div>
+              <p className="eyebrow">2019–2024</p>
+              <div className="mt-7 space-y-6 leading-8 text-white/65">
+                <p>When EMIT Technologies began constructing a new 38,000 sq ft office addition in 2019, EMIT began hiring qualified construction personnel for the project. By the time the office addition was completed in 2021, a very capable and qualified construction team had been assembled.</p>
+                <p>Even before the office was completed and as COVID hit, the decision was made to take on projects for external customers in the community. The construction team worked as Axe Build dba EMIT Technologies Inc.</p>
+                <p>As Axe Build continued to grow and take on larger projects, it became apparent the team had matured enough to be a free-standing company. Legal work began in March 2024, and on April 1, 2024, Axe Build, LLC officially became an employer, with seven members on the initial team.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="surface-mid-gradient border-y border-white/10 py-20 sm:py-24">
+        <div className="container-shell">
+          <SectionHeading
+            eyebrow="Built for Vertical Integration"
+            title="Design and Build Under One Company."
+            copy="Axe Build focuses on structural steel commercial building construction, with the in-house capability to design, fabricate, coat, and build structural steel projects."
+          />
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+            <article className="industrial-panel p-7 sm:p-8">
+              <p className="text-xs font-black uppercase tracking-[.15em] text-[var(--accent)]">Construction</p>
+              <p className="mt-8 leading-7 text-white/60">Axe Build began with construction expertise and has completed projects ranging from primarily earthwork and concrete to schools, hospitals, and buildings for the Wyoming Military.</p>
+            </article>
+            <article className="industrial-panel p-7 sm:p-8">
+              <p className="text-xs font-black uppercase tracking-[.15em] text-[var(--accent)]">Engineering</p>
+              <p className="mt-8 leading-7 text-white/60">Axe Build pursued a Design Build model, hiring a Registered Structural Engineer and a Drafter. The company currently has four mechanical and civil engineers.</p>
+            </article>
+            <article className="industrial-panel p-7 sm:p-8">
+              <p className="text-xs font-black uppercase tracking-[.15em] text-[var(--accent)]">Project Role</p>
+              <p className="mt-8 leading-7 text-white/60">Axe Build operates as a General Contractor and also partners with other General Contractors as a subcontractor.</p>
+            </article>
+          </div>
+          <AxeMedia asset={axeMedia.shopWide} label="Engineering, fabrication, coatings, and construction" className="mt-4 min-h-96" sizes="100vw" />
+        </div>
+      </section>
+
+      <section className="surface-charcoal-gradient py-20 sm:py-24">
+        <div className="container-shell">
+          <p className="eyebrow">Our Purpose</p>
+          <h2 className="display display-statement mt-7 max-w-7xl text-4xl sm:text-6xl lg:text-7xl">{companyPurpose}</h2>
+        </div>
+      </section>
+
+      <section className="surface-dark border-t border-white/10 py-20 sm:py-24">
+        <div className="container-shell">
+          <SectionHeading eyebrow="Our Values" title="How Axe Build Works." />
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-6">
+            {companyValues.map((value, index) => (
+              <article key={value.title} className={`industrial-panel p-7 ${index < 3 ? "lg:col-span-2" : "lg:col-span-3"}`}>
+                <p className="text-xs font-black text-[var(--accent)]">0{index + 1}</p>
+                <h3 className="mt-10 text-2xl font-black uppercase">{value.title}</h3>
+                <p className="mt-4 leading-7 text-white/60">{value.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </InteriorPage>
+  );
+}

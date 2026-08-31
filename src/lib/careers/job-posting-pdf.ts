@@ -38,7 +38,7 @@ export async function generateJobPostingPdf(posting: JobPosting, configuredSiteU
   const document = await PDFDocument.create();
   document.registerFontkit(fontkit);
   const font = await document.embedFont(await readFile(path.join(process.cwd(), "public", "fonts", "Geist-Regular.ttf")), { subset: true });
-  const qr = await document.embedPng(await QRCode.toBuffer(qrTarget, { type: "png", width: 210, margin: 3, errorCorrectionLevel: "M", color: { dark: "#151515", light: "#FFFFFF" } }));
+  const qr = await document.embedPng(await QRCode.toBuffer(qrTarget, { type: "png", width: 210, margin: 3, errorCorrectionLevel: "M", color: { dark: "#0B1724", light: "#FFFFFF" } }));
   document.setTitle(`Axe Build Job Posting — ${posting.jobTitle}`); document.setAuthor("Axe Build, LLC"); document.setSubject("Employment opportunity");
   let page!: PDFPage, y = 0;
   const addPage = () => { page = document.addPage([WIDTH, HEIGHT]); page.drawRectangle({ x: 0, y: HEIGHT - 18, width: WIDTH, height: 18, color: ORANGE }); page.drawText("AXE BUILD, LLC", { x: MARGIN, y: HEIGHT - 50, size: 10, font, color: ORANGE }); y = HEIGHT - 78; };

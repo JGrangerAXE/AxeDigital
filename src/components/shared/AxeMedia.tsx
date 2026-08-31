@@ -29,7 +29,7 @@ export function AxeMedia({
         style={{ objectPosition: asset.position }}
         className={`object-cover transition-transform duration-700 group-hover:scale-[1.015] ${imageClassName}`}
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--background-deep)]/80 via-transparent to-[var(--background-deep)]/15" aria-hidden="true" />
       {label ? (
         <figcaption className="absolute inset-x-0 bottom-0 p-5 text-xs font-black uppercase tracking-[.16em] text-white">
           {label}

@@ -20,9 +20,9 @@ export function Footer() {
       <div className="container-shell grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link href="/" className="logo-frame inline-flex p-3" aria-label="Axe Build home">
-            <Image src="/logos/AXE%20BUILD%20IMG%20TRANSPARENT%20resized.png" alt="Axe Build, LLC" width={1024} height={504} className="h-auto w-40" />
+            <Image src="/logos/AXE%20BUILD%20LOGO.png" alt="Axe Build, LLC" width={2059} height={984} className="h-auto w-40" />
           </Link>
-          <p className="mt-4 max-w-xs text-sm leading-6 text-white/50">Construction and fabrication. Built by people who take pride in real work.</p>
+          <p className="mt-4 max-w-xs text-sm leading-6 text-white/50">Vertically integrated design-build commercial construction with in-house engineering, fabrication, coatings, and construction.</p>
         </div>
         <div>
           <p className="text-xs font-black uppercase tracking-[.16em] text-white/40">Navigate</p>
@@ -42,7 +42,7 @@ export function Footer() {
         ) : null}
         <div>
           <p className="text-xs font-black uppercase tracking-[.16em] text-white/40">Build your future</p>
-          <p className="my-4 text-sm leading-6 text-white/60">Interested in skilled work with Axe?</p>
+          <p className="my-4 text-sm leading-6 text-white/60">Interested in skilled work with Axe Build?</p>
           <ButtonLink href="/careers">Explore Careers</ButtonLink>
         </div>
       </div>

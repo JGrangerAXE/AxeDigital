@@ -5,6 +5,7 @@ import { JobListings } from "@/components/careers/JobListings";
 import { AxeMedia } from "@/components/shared/AxeMedia";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { companyPurpose, companyValues } from "@/content/company";
 import { axeMedia, type AxeMediaAsset } from "@/content/media";
 import { getOpenJobPosting, getOpenJobPostings } from "@/lib/careers/job-repository";
 
@@ -35,11 +36,11 @@ const process = [
   },
   {
     title: "Talk With Us",
-    copy: "We’ll review your application and expect to get back to you within one week.",
+    copy: "We review applications promptly and will reach out if we’d like to move forward.",
   },
   {
     title: "Meet the Team",
-    copy: "If we move forward, the process will generally include two interviews with the Axe team.",
+    copy: "If we move forward, the process will generally include two interviews with the Axe Build team.",
   },
   {
     title: "Get to Work",
@@ -68,11 +69,11 @@ export default async function CareersPage({ searchParams }: { searchParams: Prom
           style={{ objectPosition: axeMedia.telehandlerEntry.position }}
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--background-deep)] via-[var(--background-deep)]/72 to-black/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--background-dark)] via-transparent to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--background-deep)] via-[var(--background-deep)]/75 to-[var(--background-deep)]/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--background-dark)] via-transparent to-[var(--background-deep)]/40" />
         <div className="container-shell relative flex min-h-[calc(88svh-5rem)] items-end pb-14 pt-28 sm:pb-20">
           <div>
-            <p className="eyebrow">Careers at Axe</p>
+            <p className="eyebrow">Careers at Axe Build</p>
             <h1 className="display mt-6 max-w-5xl text-[clamp(4rem,10vw,8.5rem)]">
               Your Work Should <span className="text-[var(--accent)]">Mean Something.</span>
             </h1>
@@ -86,7 +87,7 @@ export default async function CareersPage({ searchParams }: { searchParams: Prom
 
       <section className="surface-dark py-20 sm:py-24">
         <div className="container-shell">
-          <SectionHeading eyebrow="Why Axe" title="Work Worth Doing." />
+          <SectionHeading eyebrow="Why Axe Build" title="Work Worth Doing." />
           <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_.92fr]">
             <div className="grid gap-3 sm:grid-cols-2">
               {values.map((value, index) => (
@@ -98,6 +99,13 @@ export default async function CareersPage({ searchParams }: { searchParams: Prom
               ))}
             </div>
             <AxeMedia asset={axeMedia.crewRebar} label="Real work. Real contribution." className="min-h-[32rem]" sizes="(max-width: 1024px) 100vw, 48vw" />
+          </div>
+          <div className="industrial-panel mt-4 p-7 sm:p-9">
+            <p className="eyebrow">Our Purpose</p>
+            <p className="mt-6 max-w-5xl text-2xl font-black leading-9 sm:text-3xl">{companyPurpose}</p>
+            <ul className="mt-8 flex flex-wrap gap-2" aria-label="Axe Build values">
+              {companyValues.map((value) => <li key={value.title} className="border border-white/15 bg-[var(--background-mid)] px-4 py-3 text-xs font-black uppercase tracking-[.1em]">{value.title}</li>)}
+            </ul>
           </div>
         </div>
       </section>

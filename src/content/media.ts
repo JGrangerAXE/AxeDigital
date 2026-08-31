@@ -7,7 +7,7 @@ export type AxeMediaAsset = {
 export const axeMedia = {
   excavatorsWide: {
     src: "/media/PXL_20260714_191313681.jpg",
-    alt: "Two CAT excavators on an active Axe construction site",
+    alt: "Two CAT excavators on an active Axe Build construction site",
     position: "center 52%",
   },
   crewRebar: {
@@ -27,7 +27,7 @@ export const axeMedia = {
   },
   telehandlerEntry: {
     src: "/media/PXL_20260714_162131503.jpg",
-    alt: "Axe-branded telehandler entering an industrial building",
+    alt: "Axe Build-branded telehandler entering an industrial building",
     position: "center 56%",
   },
   telehandlerDetail: {
@@ -47,12 +47,12 @@ export const axeMedia = {
   },
   fabricatedBeam: {
     src: "/media/PXL_20260714_153458525.jpg",
-    alt: "Large fabricated steel beam and worker inside the Axe shop",
+    alt: "Large fabricated steel beam and worker inside the Axe Build shop",
     position: "center 48%",
   },
   shopWide: {
     src: "/media/PXL_20260714_161140306.jpg",
-    alt: "Wide Axe fabrication shop with machinery, steel, and material-handling equipment",
+    alt: "Wide Axe Build fabrication shop with machinery, steel, and material-handling equipment",
     position: "center 54%",
   },
   plasmaCutting: {
@@ -62,7 +62,7 @@ export const axeMedia = {
   },
   steelMachine: {
     src: "/media/PXL_20260714_161622764.jpg",
-    alt: "Large automated steel processing machine inside the Axe shop",
+    alt: "Large automated steel processing machine inside the Axe Build shop",
     position: "center 46%",
   },
   steelStock: {

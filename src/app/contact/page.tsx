@@ -45,8 +45,8 @@ export default function Contact() {
                 <div className="industrial-panel flex flex-col justify-between gap-10 p-7 sm:p-9">
                   <h2 className="display max-w-2xl text-4xl sm:text-5xl">Start a Conversation.</h2>
                   <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                    {contact.phoneHref ? <ButtonLink href={contact.phoneHref}>Call Axe</ButtonLink> : null}
-                    {contact.emailHref ? <ButtonLink href={contact.emailHref} variant="secondary">Email Axe</ButtonLink> : null}
+                    {contact.phoneHref ? <ButtonLink href={contact.phoneHref}>Call Axe Build</ButtonLink> : null}
+                    {contact.emailHref ? <ButtonLink href={contact.emailHref} variant="secondary">Email Axe Build</ButtonLink> : null}
                     {contact.quoteEmailHref ? <ButtonLink href={contact.quoteEmailHref} variant="secondary">Request a Quote</ButtonLink> : null}
                   </div>
                 </div>
