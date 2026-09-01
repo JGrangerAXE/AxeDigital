@@ -33,6 +33,28 @@ export default function About() {
         </div>
       </section>
 
+      <section className="surface-charcoal-gradient border-y border-white/10 py-20 sm:py-24">
+        <div className="container-shell">
+          <div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:gap-16">
+            <div>
+              <p className="eyebrow">Where We Are Now</p>
+              <h2 className="display mt-6 max-w-2xl text-4xl sm:text-5xl lg:text-6xl">Built to Take Projects From Inception to Completion.</h2>
+            </div>
+            <div className="space-y-6 text-base leading-8 text-white/65 sm:text-lg sm:leading-9">
+              <p>Axe Build has grown into a team of more than 30 people with the capability to take full-scale projects from early design through final construction. Our in-house capabilities now include design, engineering and specification, structural steel fabrication, sitework, concrete, and erection.</p>
+              <p>Because these disciplines are vertically integrated under one company, Axe Build can tightly control quality, speed, and accuracy from one phase to the next. Just as importantly, our integrated structure lets us pivot quickly when jobsite conditions change, keeping decisions close to the work, reducing handoff delays, and maintaining forward momentum.</p>
+            </div>
+          </div>
+          <ul className="mt-12 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-5" aria-label="Current in-house capabilities">
+            {["Design + Engineering", "Fabrication", "Sitework", "Concrete", "Erection"].map((capability) => (
+              <li key={capability} className="bg-[var(--background-deep)] px-5 py-6 text-sm font-black uppercase tracking-[.08em] text-white">
+                {capability}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className="surface-mid-gradient border-y border-white/10 py-20 sm:py-24">
         <div className="container-shell">
           <SectionHeading
@@ -43,11 +65,11 @@ export default function About() {
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
             <article className="industrial-panel p-7 sm:p-8">
               <p className="text-xs font-black uppercase tracking-[.15em] text-[var(--accent)]">Construction</p>
-              <p className="mt-8 leading-7 text-white/60">Axe Build began with construction expertise and has completed projects ranging from primarily earthwork and concrete to schools, hospitals, and buildings for the Wyoming Military.</p>
+              <p className="mt-8 leading-7 text-white/60">Axe Build has completed projects ranging from primarily earthwork and concrete to schools, hospitals, and buildings for the Wyoming Military.</p>
             </article>
             <article className="industrial-panel p-7 sm:p-8">
               <p className="text-xs font-black uppercase tracking-[.15em] text-[var(--accent)]">Engineering</p>
-              <p className="mt-8 leading-7 text-white/60">Axe Build pursued a Design Build model, hiring a Registered Structural Engineer and a Drafter. The company currently has four mechanical and civil engineers.</p>
+              <p className="mt-8 leading-7 text-white/60">Axe Build operates under a Design Build model with on-staff engineers, drafters and detailers.</p>
             </article>
             <article className="industrial-panel p-7 sm:p-8">
               <p className="text-xs font-black uppercase tracking-[.15em] text-[var(--accent)]">Project Role</p>

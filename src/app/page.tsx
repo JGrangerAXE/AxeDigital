@@ -32,7 +32,12 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-[var(--background-deep)] via-[var(--background-deep)]/75 to-[var(--background-deep)]/15" />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--background-deep)] via-transparent to-[var(--background-deep)]/45" />
         <div className="container-shell relative z-10 pb-14 pt-28 sm:pb-20">
-          <p className="eyebrow">Design Build / Vertically Integrated</p>
+          <p className="eyebrow leading-relaxed">
+ 	 <span>
+   	 <span className="block">Vertically Integrated Commercial Contractor</span>
+  	  <span className="block">Design · Build · Fabricate · Construct</span>
+ 	 </span>
+	</p>
           <h1 className="display mt-6 max-w-5xl text-[clamp(4.5rem,13vw,10rem)]">
             Build Something <span className="text-[var(--accent)]">Real.</span>
           </h1>
@@ -57,7 +62,7 @@ export default function Home() {
               <div className="mt-16 flex items-end justify-between gap-5">
                 <div>
                   <h2 className="display text-5xl sm:text-6xl">Work With Axe Build</h2>
-                  <p className="mt-4 max-w-sm leading-7 text-white/55">Careers, skilled trades, learning, and the chance to contribute.</p>
+                  <p className="mt-4 max-w-sm leading-7 text-white/55">Careers, skilled trades, and the chance to contribute.</p>
                 </div>
                 <span className="text-3xl transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
               </div>
@@ -124,13 +129,13 @@ export default function Home() {
 
       <section className="surface-dark py-20 sm:py-24">
         <div className="container-shell">
-          <SectionHeading eyebrow="Life at Axe Build" title="Real Work. Real People." copy="A first look at the equipment, environments, and hands-on work behind Axe Build." />
+          <SectionHeading eyebrow="Life at Axe Build" title="Real Work. Real People." copy="A look at the equipment, environments, and hands-on work behind Axe Build." />
           <div className="mt-10 grid auto-rows-[15rem] grid-cols-2 gap-3 lg:auto-rows-[18rem] lg:grid-cols-12">
-            <AxeMedia asset={axeMedia.excavatorsPortrait} label="In the field" className="row-span-2 lg:col-span-4" sizes="(max-width: 1024px) 50vw, 33vw" />
-            <AxeMedia asset={axeMedia.liftsBay} label="On site" className="lg:col-span-5" sizes="(max-width: 1024px) 50vw, 42vw" />
-            <AxeMedia asset={axeMedia.telehandlerDetail} label="Axe Build equipment" className="lg:col-span-3" sizes="(max-width: 1024px) 50vw, 25vw" />
-            <AxeMedia asset={axeMedia.steelStock} label="Ready to build" className="lg:col-span-3" sizes="(max-width: 1024px) 50vw, 25vw" />
-            <AxeMedia asset={axeMedia.weldingEquipment} label="Shop ready" className="lg:col-span-5" sizes="(max-width: 1024px) 50vw, 42vw" />
+            <AxeMedia asset={axeMedia.excavatorsPortrait} label="" className="row-span-2 lg:col-span-4" sizes="(max-width: 1024px) 50vw, 33vw" />
+            <AxeMedia asset={axeMedia.liftsBay} label="" className="lg:col-span-5" sizes="(max-width: 1024px) 50vw, 42vw" />
+            <AxeMedia asset={axeMedia.telehandlerDetail} label="" className="lg:col-span-3" sizes="(max-width: 1024px) 50vw, 25vw" />
+            <AxeMedia asset={axeMedia.steelStock} label="" className="lg:col-span-3" sizes="(max-width: 1024px) 50vw, 25vw" />
+            <AxeMedia asset={axeMedia.weldingEquipment} label="" className="lg:col-span-5" sizes="(max-width: 1024px) 50vw, 42vw" />
           </div>
         </div>
       </section>
