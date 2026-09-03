@@ -94,8 +94,15 @@ export default function Home() {
                 height: 126,
               }}
             />
-            {/* Add the official Wyoming Resident Contractor mark through the logo prop when supplied. */}
-            <CredentialCard title="WYOMING RESIDENT CONTRACTOR" />
+            <CredentialCard
+              title="WYOMING RESIDENT CONTRACTOR"
+              logo={{
+                src: "/logos/wyoming-resident-contractor-2251.png",
+                alt: "Wyoming Resident Contractor 2251",
+                width: 2348,
+                height: 2073,
+              }}
+            />
           </div>
         </div>
       </section>
